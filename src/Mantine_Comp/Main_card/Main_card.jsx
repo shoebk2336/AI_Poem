@@ -1,5 +1,5 @@
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
-import { Container, Grid, Input, Select, Text } from "@mantine/core";
+import { Box, Container, Grid, Input, Select, Text } from "@mantine/core";
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -8,6 +8,7 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ShinyButton } from "@/components/ui/shiny-button"
 import { Generate_Fun } from "../../Backend/Open_AI";
 import { Dotted_Text } from "../Dotted_text/Dotted_Text";
+import { AnimatedCircularProgressBarDemo } from "../Progress_bar/Progress";
 
  
 
@@ -77,6 +78,7 @@ export const Main_Card=()=>{
     ]
     const [value, setValue] = useState({});
     const [Processed_Poem,set_Poem]=useState("")
+    const [Loading,setLoading]=useState(false)
     console.log(value)
 
     const Capture_Data=(value,name)=>{
@@ -88,7 +90,10 @@ export const Main_Card=()=>{
     }
 
     const Generate_btn=async()=>{
+        set_Poem("")
+        setLoading(true)
         const Result=await Generate_Fun(value)
+        setLoading(false)
         set_Poem(Result)
     }
     return(<>
@@ -154,16 +159,25 @@ export const Main_Card=()=>{
            
             <br/>
             <ShinyButton
+            
+            
             onClick={Generate_btn}
-                 className='w-80 m-auto  flex justify-center items-center bg-red'>
+            className=' w-80 m-auto  flex justify-center items-center
+                  
+                 
+                 '>
                     Generate</ShinyButton>
+                   
             
     </NeonGradientCard>
+    {Loading?
+    <Box style={{display:"flex",justifyContent:"center",marginTop:50}}>
+    <AnimatedCircularProgressBarDemo/>
+    </Box>:null}
     <br/>
     <br/>
-    {/* {Processed_Poem?
-    <Dotted_Text Poem_Text={Processed_Poem}/>:null} */}
-     <Dotted_Text Poem_Text={Processed_Poem}/>
+    {Processed_Poem?
+    <Dotted_Text Poem_Text={Processed_Poem}/>:null}
     </Container>
     </>)
 }                                                                                                                                                                                                                                                                                                                                                       

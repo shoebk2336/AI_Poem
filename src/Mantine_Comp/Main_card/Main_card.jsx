@@ -1,6 +1,6 @@
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import { Box, Container, Grid, Input, Select, Text } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
@@ -9,6 +9,10 @@ import { ShinyButton } from "@/components/ui/shiny-button"
 import { Generate_Fun } from "../../Backend/Open_AI";
 import { Dotted_Text } from "../Dotted_text/Dotted_Text";
 import { AnimatedCircularProgressBarDemo } from "../Progress_bar/Progress";
+import { Demo } from "../Notification/Notification";
+import { Poem_Avatar } from "../Avatar/Avatar";
+import doll from '../../assets/doll.png'
+import tree from '../../assets/tree.png'
 
  
 
@@ -32,7 +36,7 @@ export const Main_Card=()=>{
             Name:"Emotions",
             Heading:"Select Emotions/Mood",
             placeholder:"e.g. Happy,Sad,Romantic etc.",
-            data:["Happy","Sad","Romatc","Mysterious","Nostalgic",
+            data:["Happy","Sad","Romantic","Mysterious","Nostalgic",
                 "Calm","Angry","Hopeful","Inspiring","Humorous"
             ],
             xs:6,
@@ -79,6 +83,7 @@ export const Main_Card=()=>{
     const [value, setValue] = useState({});
     const [Processed_Poem,set_Poem]=useState("")
     const [Loading,setLoading]=useState(false)
+    const [user_name,set_userName]=useState()
     console.log(value)
 
     const Capture_Data=(value,name)=>{
@@ -90,17 +95,27 @@ export const Main_Card=()=>{
     }
 
     const Generate_btn=async()=>{
+        window.scrollTo(0, document.body.scrollHeight / 2.5);
         set_Poem("")
         setLoading(true)
         const Result=await Generate_Fun(value)
         setLoading(false)
         set_Poem(Result)
+        
     }
+    useEffect(()=>{
+        const user_name=JSON.parse(localStorage.getItem("user"))
+        if(user_name?.name){set_userName(user_name?.name)}
+
+    })
     return(<>
     <Container size='sm'
-    style={{border:"0px solid red"}}
+    style={{overflow:"",border:"0px solid red",position:"relative",marginLeft:"20px"}}
     >
-    <AnimatedGradientText>
+        <Box style={{border:"0px solid red",position:"relative",display:"flex",
+            justifyContent:"center",alignItems:"center"
+        }}>    
+        <AnimatedGradientText>
         🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
         <span
           className={cn(
@@ -111,8 +126,20 @@ export const Main_Card=()=>{
         >
           Create Your Perfect Poem
         </span>
-        <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
       </AnimatedGradientText>
+      {user_name?
+        <Box style={{position:"absolute",right:-120,top:"-13%",display:"flex",
+            alignItems:"center",display:"flex",gap:10,justifyContent:"center",border:"0px solid red"
+        }}>
+            <Poem_Avatar/>
+            <Text
+            c='#7518be'
+            fw={600}
+            style={{fontStyle:"italic"}}
+            >{user_name}</Text>
+        </Box>:null}
+      </Box>
+
     <NeonGradientCard className=" text-left mt-5 h-[450px]">
       {/* <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
         Neon Gradient Card
@@ -178,6 +205,10 @@ export const Main_Card=()=>{
     <br/>
     {Processed_Poem?
     <Dotted_Text Poem_Text={Processed_Poem}/>:null}
+     <img src={doll} alt="doll" style={{position:"absolute",
+        width:"350px",height:"600px",right:"-260px",top:-50,transform:"rotate(-00deg)"
+    }}/>
     </Container>
+   
     </>)
 }                                                                                                                                                                                                                                                                                                                                                       

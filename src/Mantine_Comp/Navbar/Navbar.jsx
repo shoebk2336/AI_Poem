@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   // Icon2fa,
   IconBellRinging,
@@ -23,6 +23,7 @@ const data = [
 
 export function NavbarSimpleColored() {
   const [active, setActive] = useState('Billing');
+  const [loggedin,set_Loggedin]=useState(false)
   const navigate=useNavigate()
 
   const links = data.map((item) => (
@@ -40,6 +41,12 @@ export function NavbarSimpleColored() {
       <span>{item.label}</span>
     </a>
   ));
+  useEffect(()=>{
+    const user_name=JSON.parse(localStorage.getItem("user"))
+    if(user_name?.name){set_Loggedin(true)}
+
+  })
+
 
   return (
     <nav className={classes.navbar}>
@@ -68,12 +75,26 @@ export function NavbarSimpleColored() {
           <span>Change account</span>
         </a> */}
 
+        {!loggedin?
         <a  className={classes.link} onClick={(event) => event.preventDefault()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span
-          onClick={()=>navigate('/login')}
+          onClick={()=>{
+            navigate('/login');
+            window.scrollTo(0, 0);
+          }}
           >Login</span>
-        </a>
+        </a>:
+        <a  className={classes.link} onClick={(event) => event.preventDefault()}>
+          <IconLogout className={classes.linkIcon} stroke={1.5} />
+          <span
+          onClick={()=>{
+            localStorage.removeItem("user");
+            set_Loggedin(false);
+            window.location.reload()          
+          }}
+          >Logout</span>
+        </a>}
       </div>
     </nav>
   );

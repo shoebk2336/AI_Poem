@@ -206,7 +206,7 @@ export const Main_Card=()=>{
     {Processed_Poem?
     <Dotted_Text Poem_Text={Processed_Poem}/>:null}
      <img src={doll} alt="doll" style={{position:"absolute",
-        width:"350px",height:"600px",right:"-260px",top:-50,transform:"rotate(-00deg)"
+        width:"350px",height:"600px",right:"-260px",top:-25,transform:"rotate(-00deg)"
     }}/>
     </Container>
    

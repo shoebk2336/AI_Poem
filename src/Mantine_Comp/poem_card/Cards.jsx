@@ -22,7 +22,7 @@ export function FeaturesCards({Poems}) {
       {/* <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
         {}
       </Text> */}
-      <Text fz="sm" c="dimmed" mt="sm" style={{whiteSpace:"pre-wrap"}}>
+      <Text fz="sm" c="black" mt="sm" style={{whiteSpace:"pre-wrap"}}>
         {poem}
       </Text>
     </Card>

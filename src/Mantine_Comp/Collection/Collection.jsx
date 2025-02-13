@@ -14,12 +14,11 @@ export const Display_collection=()=>{
         const Loggedin_user=JSON.parse(localStorage.getItem("user"))
         console.log(Loggedin_user,'user')
 
-        for(let i=0;i<Poems.length;i++){
+        for(let i=0;i<Poems?.length;i++){
             if(Loggedin_user.email==Poems[i].User_Id){
                 set_Poems(prev=>[...prev,Poems[i].Poem_Text])
             }
         }
-        // alert("Sorry you have No Poem Contribution")
 
         
     },[])

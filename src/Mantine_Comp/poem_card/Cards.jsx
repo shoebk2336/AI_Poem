@@ -26,6 +26,8 @@ export function FeaturesCards({Poems}) {
         {poem}
       </Text>
     </Card>
+
+
   ));
 
   return (
@@ -52,7 +54,14 @@ export function FeaturesCards({Poems}) {
       </Text>
 
       <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" mt={50}>
-        {features}
+        {Poems.length==0?
+        <Title order={2} className={classes.title} ta="center" mt="sm">
+        Your poetic journey has just begun! ✨ 
+        Start writing your first poem and let your words create magic.
+        </Title>
+        
+        :
+        features}
       </SimpleGrid>
     </Container>
   );

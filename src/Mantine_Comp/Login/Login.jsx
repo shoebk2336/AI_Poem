@@ -23,6 +23,7 @@ export function AuthenticationTitle() {
   const [Login_Data,setLogin_Data]=useState({})
   const[Notify,set_Notify]=useState(false)
   const [Loading,set_Loading]=useState(false)
+  const [is_reg,Set_reg]=useState(false) //to switch into registeration
   // console.log(Login_Data,'login data')
 
   const Handle_Change=(e)=>{
@@ -33,20 +34,57 @@ export function AuthenticationTitle() {
     }))
 
   }
-
-  const Signin=()=>{
-    set_Loading(true)
-    console.log(Login_Data)
-    localStorage.setItem("user", JSON.stringify(Login_Data));
-    setTimeout(()=>{set_Loading(false)},3000)
-    setTimeout(() => {
+  const Login_User=()=>{
+    console.log("login clicked")
+    const Reg_users=JSON.parse(localStorage.getItem('Registration'))
+    const {email,pass}=Login_Data
+    for(let i=0;i<Reg_users.length;i++){
+      if(email==Reg_users[i].email && pass==Reg_users[i].pass){
+      setTimeout(()=>{set_Loading(false)},3000)
+      setTimeout(() => {
       set_Notify(true);
       setTimeout(() => {
-        set_Notify(false); // Turns off after 2 seconds
+      set_Notify(false); // Turns off after 2 seconds
       }, 2000);
     }, 3000);
+    localStorage.setItem("user",JSON.stringify(Login_Data))
     
     setTimeout(()=>{navigate('/')},3500)
+    return
+        
+      }
+    }
+    setTimeout(()=>{set_Loading(false)},2000)
+    setTimeout(()=>{alert("Email OR Password is wrong")},2100)
+     
+
+  }
+
+  const Register_User=async()=>{
+    console.log("register clicked")
+    const Registration_arr=JSON.parse(localStorage.getItem('Registration'))||[]
+    Registration_arr.push(Login_Data)
+    localStorage.setItem("Registration", JSON.stringify(Registration_arr))
+
+     setTimeout(()=>{
+      alert("Registration done Successfully ")
+
+      setTimeout(()=>{
+        Set_reg(false)
+      },1000)
+
+    },1500)
+    
+
+  }
+  const Login_Register=()=>{
+    set_Loading(true)
+    console.log(Login_Data)
+    {is_reg?
+      Register_User():Login_User()  //login function call
+    }
+    
+    
   }
   return (
     
@@ -57,19 +95,30 @@ export function AuthenticationTitle() {
       <Title ta="center" className={classes.title}>
         Welcome back!
       </Title>
-      {/* <Text c="dimmed" size="sm" ta="center" mt={5}>
+      {!is_reg?<Text c="dimmed" size="sm" ta="center" mt={5}>
         Do not have an account yet?{' '}
-        <Anchor size="sm" component="button">
+        <Anchor
+        onClick={()=>Set_reg(true)}
+        size="sm" component="button">
           Create account
         </Anchor>
-      </Text> */}
+      </Text>:
+      <Text c="dimmed" size="sm" ta="center" mt={5}>
+      Welcome aboard! Already a member? {' '}
+        <Anchor
+        style={{border:"0px solid red"}}
+        onClick={()=>Set_reg(false)}
+        size="sm" component="button">
+          Sign in here
+        </Anchor>
+      </Text>}
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md" ta="left">
-      <TextInput 
+      {is_reg?<TextInput 
         name="name"
         value={Login_Data.name}
         onChange={(e)=>Handle_Change(e)}
-        label="Name" placeholder="AAFREEN AJAZ PATHAN" required />
+        label="Name" placeholder="AAFREEN AJAZ PATHAN" required />:null}
         <TextInput 
         name="email"
         value={Login_Data.email}
@@ -88,9 +137,9 @@ export function AuthenticationTitle() {
         </Group>
         <Button
         disabled={Loading}
-        onClick={Signin}
+        onClick={Login_Register}
         fullWidth mt="xl">
-          Sign in
+          {is_reg?"Sign Up":"Sign In"}
         </Button>
         {Loading?<Box style={{border:"0px solid red",display:"flex",justifyContent:"center",margin:"auto",aspectRatio:1,
           width:"20%"

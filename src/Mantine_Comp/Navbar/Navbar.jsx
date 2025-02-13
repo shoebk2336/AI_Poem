@@ -19,6 +19,7 @@ const data = [
   { link: '/', label: 'Dashboard', icon: IconBellRinging },
   { link: '/collection', label: 'Collection', icon: IconDatabaseImport },
   { link: '/about', label: 'About', icon: IconSettings },
+  { link: '/admin', label: 'Admin', icon: IconSettings },
 ];
 
 export function NavbarSimpleColored() {
@@ -43,7 +44,7 @@ export function NavbarSimpleColored() {
   ));
   useEffect(()=>{
     const user_name=JSON.parse(localStorage.getItem("user"))
-    if(user_name?.name){set_Loggedin(true)}
+    if(user_name?.email){set_Loggedin(true)}
 
   })
 
@@ -76,13 +77,14 @@ export function NavbarSimpleColored() {
         </a> */}
 
         {!loggedin?
-        <a  className={classes.link} onClick={(event) => event.preventDefault()}>
+        <a  className={classes.link} 
+        onClick={()=>{
+          navigate('/login');
+          window.scrollTo(0, 0);
+        }}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span
-          onClick={()=>{
-            navigate('/login');
-            window.scrollTo(0, 0);
-          }}
+          
           >Login</span>
         </a>:
         <a  className={classes.link} onClick={(event) => event.preventDefault()}>
@@ -91,6 +93,7 @@ export function NavbarSimpleColored() {
           onClick={()=>{
             localStorage.removeItem("user");
             set_Loggedin(false);
+            navigate('/')
             window.location.reload()          
           }}
           >Logout</span>

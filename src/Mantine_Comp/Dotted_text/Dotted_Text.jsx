@@ -5,12 +5,14 @@ import { Box, ScrollArea, Text } from "@mantine/core";
 import { PulsatingButton } from "@/components/ui/pulsating-button";
 
 
-export const Dotted_Text=(Poem)=>{
+export const Dotted_Text=(Poem,Id)=>{
     console.log(Poem,'text')
 
     const Save_Poem=()=>{
+      console.log('save btn')
         let poems = JSON.parse(localStorage.getItem("poems")) || [];
-        poems.push(Poem.Poem_Text);
+        // poems.push(Poem.Poem_Text);
+        poems.push(Poem);
         localStorage.setItem("poems", JSON.stringify(poems));
     }
 

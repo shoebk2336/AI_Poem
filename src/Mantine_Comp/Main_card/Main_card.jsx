@@ -83,8 +83,9 @@ export const Main_Card=()=>{
     const [value, setValue] = useState({});
     const [Processed_Poem,set_Poem]=useState("")
     const [Loading,setLoading]=useState(false)
-    const [user_name,set_userName]=useState()
-    console.log(value)
+    const [user_name,set_userName]=useState()//using to show on dashboard
+    const [Id,set_Id]=useState() //using to link poem with users
+    console.log(Id,'idd')
 
     const Capture_Data=(value,name)=>{
         setValue((prevData)=>({
@@ -98,14 +99,21 @@ export const Main_Card=()=>{
         window.scrollTo(0, document.body.scrollHeight / 2.5);
         set_Poem("")
         setLoading(true)
-        const Result=await Generate_Fun(value)
+        const Result=await Generate_Fun(value,Id)
         setLoading(false)
         set_Poem(Result)
         
     }
     useEffect(()=>{
         const user_name=JSON.parse(localStorage.getItem("user"))
-        if(user_name?.name){set_userName(user_name?.name)}
+        const Reg_users=JSON.parse(localStorage.getItem('Registration'))
+
+        for(let i=0;i<Reg_users.length;i++){
+            if(user_name?.email==Reg_users[i].email){
+                set_userName(Reg_users[i].name)
+                set_Id(user_name.email)
+            }
+        }
 
     })
     return(<>
@@ -204,7 +212,7 @@ export const Main_Card=()=>{
     <br/>
     <br/>
     {Processed_Poem?
-    <Dotted_Text Poem_Text={Processed_Poem}/>:null}
+    <Dotted_Text Poem_Text={Processed_Poem } User_Id={Id}/>:null}
      <img src={doll} alt="doll" style={{position:"absolute",
         width:"350px",height:"600px",right:"-260px",top:-25,transform:"rotate(-00deg)"
     }}/>

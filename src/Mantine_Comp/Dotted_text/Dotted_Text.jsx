@@ -9,7 +9,6 @@ export const Dotted_Text=(Poem,Id)=>{
     console.log(Poem,'text')
 
     const Save_Poem=()=>{
-      console.log('save btn')
         let poems = JSON.parse(localStorage.getItem("poems")) || [];
         // poems.push(Poem.Poem_Text);
         poems.push(Poem);

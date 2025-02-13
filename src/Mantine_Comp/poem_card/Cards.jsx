@@ -1,6 +1,7 @@
 import { IconCookie, IconGauge, IconUser } from '@tabler/icons-react';
 import {
   Badge,
+  Box,
   Card,
   Container,
   Group,
@@ -52,17 +53,16 @@ export function FeaturesCards({Poems}) {
       Explore heartfelt verses, dreamy rhymes, and whispers of imagination—all crafted with l
       ove. Let poetry take you on a journey where emotions dance and words embrace the heart.
       </Text>
-
-      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" mt={50}>
-        {Poems.length==0?
-        <Title order={2} className={classes.title} ta="center" mt="sm">
+      <br/>
+      <br/>
+      {Poems.length==0?<Title order={2} m='auto' style={{border:"0px solid red"}}  className={classes.title} ta="center" mt="sm">
         Your poetic journey has just begun! ✨ 
         Start writing your first poem and let your words create magic.
-        </Title>
-        
-        :
-        features}
-      </SimpleGrid>
+      </Title>:
+
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl" mt={50}>
+        {features}
+      </SimpleGrid>}
     </Container>
   );
 }

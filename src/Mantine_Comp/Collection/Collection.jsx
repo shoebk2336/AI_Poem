@@ -15,7 +15,7 @@ export const Display_collection=()=>{
         console.log(Loggedin_user,'user')
 
         for(let i=0;i<Poems?.length;i++){
-            if(Loggedin_user.email==Poems[i].User_Id){
+            if(Loggedin_user?.email==Poems[i].User_Id){
                 set_Poems(prev=>[...prev,Poems[i].Poem_Text])
             }
         }

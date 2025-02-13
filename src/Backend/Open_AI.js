@@ -9,7 +9,7 @@ export const Generate_Fun=async(data)=>{
     const genAI = new GoogleGenerativeAI("AIzaSyA-Sz5v1wmTBpBJFXKkmNOuR22jpxSR0Nw");
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const prompt = `Generate a poem based on the following details. 
+    const prompt = `Generate a poem based on the following details and also give a nice Title. 
 - **Title:** ${Title}  
 - **Theme:** ${Theme}  
 - **Style:** ${Style}  

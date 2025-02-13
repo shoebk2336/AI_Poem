@@ -8,7 +8,8 @@ export const Home=()=>{
     return(
         <>
         <Container size="xl" display='flex' style={{
-            justifyContent:"space-between"
+            
+            
         }}>
             <NavbarSimpleColored/>
             <Main_Card/>

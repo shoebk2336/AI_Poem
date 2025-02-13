@@ -137,7 +137,7 @@ export const Main_Card=()=>{
       </AnimatedGradientText>
       {user_name?
         <Box style={{position:"absolute",right:-120,top:"-13%",display:"flex",
-            alignItems:"center",display:"flex",gap:10,justifyContent:"center",border:"0px solid red"
+            alignItems:"center",gap:10,justifyContent:"center",border:"0px solid red"
         }}>
             <Poem_Avatar/>
             <Text

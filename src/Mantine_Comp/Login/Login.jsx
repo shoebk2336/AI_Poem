@@ -24,7 +24,7 @@ export function AuthenticationTitle() {
   const[Notify,set_Notify]=useState(false)
   const [Loading,set_Loading]=useState(false)
   const [is_reg,Set_reg]=useState(false) //to switch into registeration
-  // console.log(Login_Data,'login data')
+  console.log(is_reg,'login data')
 
   const Handle_Change=(e)=>{
     
@@ -38,6 +38,7 @@ export function AuthenticationTitle() {
     console.log("login clicked")
     const Reg_users=JSON.parse(localStorage.getItem('Registration'))
     const {email,pass}=Login_Data
+
     for(let i=0;i<Reg_users.length;i++){
       if(email==Reg_users[i].email && pass==Reg_users[i].pass){
       setTimeout(()=>{set_Loading(false)},3000)
@@ -68,15 +69,15 @@ export function AuthenticationTitle() {
 
      setTimeout(()=>{
       alert("Registration done Successfully ")
+      set_Loading(false)
 
       setTimeout(()=>{
         Set_reg(false)
       },1000)
 
     },1500)
-    
+      }
 
-  }
   const Login_Register=()=>{
     set_Loading(true)
     console.log(Login_Data)

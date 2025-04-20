@@ -13,6 +13,17 @@ export const Dotted_Text=(Poem,Id)=>{
         // poems.push(Poem.Poem_Text);
         poems.push(Poem);
         localStorage.setItem("poems", JSON.stringify(poems));
+
+        fetch("http://localhost:5000/api/items", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(Poem)
+        })
+          .then((res) => res.json())
+          .then((data) => console.log("Saved item:", data))
+          .catch((err) => console.error("Error:", err));
     }
 
     return(

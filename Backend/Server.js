@@ -7,9 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
+
 // MongoDB connection 
-//const URL="mongodb+srv://shoebk478:Mx271Z1irtPLkpoW@cluster0.uo8wtid.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-const URL="mongodb+srv://shoeb2102:Shoebaaf2102@poem.secmqjd.mongodb.net/?retryWrites=true&w=majority&appName=Poem"
+// const URL="mongodb+srv://shoebk478:Shoebkhan@cluster0.uo8wtid.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const URL="mongodb+srv://shoebkhan2336:shoebaaf2102@poetrycluster.ythdlmi.mongodb.net/?retryWrites=true&w=majority&appName=poetrycluster"
 mongoose.connect(URL).then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 

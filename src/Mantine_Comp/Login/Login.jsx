@@ -29,7 +29,6 @@ export function AuthenticationTitle() {
   const Handle_Change=(e)=>{
     
     const{name,value}=e.target
-    console.log(name,value)
     setLogin_Data((data)=>({
       ...data,[name]:value
     }))
@@ -43,9 +42,10 @@ export function AuthenticationTitle() {
 
 
 
-    console.log("login clicked")
     const Reg_users=JSON.parse(localStorage.getItem('Registration'))
     const {email,pass}=Login_Data
+    console.log(Data,email,pass,"login clicked")
+
 
 
     for(let i=0;i<Data.length;i++){

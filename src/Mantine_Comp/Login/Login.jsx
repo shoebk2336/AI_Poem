@@ -29,6 +29,7 @@ export function AuthenticationTitle() {
   const Handle_Change=(e)=>{
     
     const{name,value}=e.target
+    console.log(name,value)
     setLogin_Data((data)=>({
       ...data,[name]:value
     }))
@@ -38,7 +39,6 @@ export function AuthenticationTitle() {
 
     const Fetch=await fetch('http://localhost:5000/api/items/login')
     const Data=await Fetch.json()
-    console.log("Data",Data)
 
 
 
@@ -76,15 +76,15 @@ export function AuthenticationTitle() {
     // Registration_arr.push(Login_Data)
     // localStorage.setItem("Registration", JSON.stringify(Registration_arr))
 
-     setTimeout(()=>{
-      alert("Registration done Successfully ")
-      set_Loading(false)
+    //  setTimeout(()=>{
+    //   alert("Registration done Successfully ")
+    //   set_Loading(false)
 
-      setTimeout(()=>{
-        Set_reg(false)
-      },1000)
+    //   setTimeout(()=>{
+    //     Set_reg(false)
+    //   },1000)
 
-    },1500)
+    // },1500)
 
     //api call for login and register
     fetch("http://localhost:5000/api/items/login", {

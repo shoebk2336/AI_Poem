@@ -10,7 +10,7 @@ export const Custom_Routes=()=>{
     return(
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login_logout />} />
+          <Route path="/login" element={<Login_logout />} />
           <Route path='/collection' element={<Collection/>}/>
           <Route path='/admin' element={<Admin/>}/>
           <Route path='/about' element={<About/>}/>

@@ -29,6 +29,7 @@
     background-color: var(--mantine-color-blue-7);
     color: var(--mantine-color-white);
   }
+
   
   .link {
     display: flex;
@@ -64,6 +65,9 @@
         }
       }
     }
+  }
+  .link:hover{
+    cursor: pointer;
   }
   
   .linkIcon {

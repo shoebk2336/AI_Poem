@@ -19,7 +19,7 @@ const data = [
   { link: '/', label: 'Dashboard', icon: IconBellRinging },
   { link: '/collection', label: 'Collection', icon: IconDatabaseImport },
   { link: '/about', label: 'About', icon: IconSettings },
-  { link: '/admin', label: 'Admin', icon: IconSettings },
+  // { link: '/admin', label: 'Admin', icon: IconSettings },
 ];
 
 export function NavbarSimpleColored() {

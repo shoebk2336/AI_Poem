@@ -24,7 +24,7 @@ export function AuthenticationTitle() {
   const[Notify,set_Notify]=useState(false)
   const [Loading,set_Loading]=useState(false)
   const [is_reg,Set_reg]=useState(false) //to switch into registeration
-  console.log(is_reg,'login data')
+  console.log(is_reg,Login_Data,'login data')
 
   const Handle_Change=(e)=>{
     
@@ -34,13 +34,22 @@ export function AuthenticationTitle() {
     }))
 
   }
-  const Login_User=()=>{
+  const Login_User=async()=>{
+
+    const Fetch=await fetch('http://localhost:5000/api/items/login')
+    const Data=await Fetch.json()
+    console.log("Data",Data)
+
+
+
+
     console.log("login clicked")
     const Reg_users=JSON.parse(localStorage.getItem('Registration'))
     const {email,pass}=Login_Data
 
-    for(let i=0;i<Reg_users.length;i++){
-      if(email==Reg_users[i].email && pass==Reg_users[i].pass){
+
+    for(let i=0;i<Data.length;i++){
+      if(email==Data[i].email && pass==Data[i].pass){
       setTimeout(()=>{set_Loading(false)},3000)
       setTimeout(() => {
       set_Notify(true);
@@ -62,10 +71,10 @@ export function AuthenticationTitle() {
   }
 
   const Register_User=async()=>{
-    console.log("register clicked")
-    const Registration_arr=JSON.parse(localStorage.getItem('Registration'))||[]
-    Registration_arr.push(Login_Data)
-    localStorage.setItem("Registration", JSON.stringify(Registration_arr))
+    // console.log("register clicked")
+    // const Registration_arr=JSON.parse(localStorage.getItem('Registration'))||[]
+    // Registration_arr.push(Login_Data)
+    // localStorage.setItem("Registration", JSON.stringify(Registration_arr))
 
      setTimeout(()=>{
       alert("Registration done Successfully ")
@@ -76,6 +85,28 @@ export function AuthenticationTitle() {
       },1000)
 
     },1500)
+
+    //api call for login and register
+    fetch("http://localhost:5000/api/items/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(Login_Data)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Saved item:", data);
+        alert("✅ Login successful!");
+        // You can redirect or save user info to localStorage here
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        alert("❌ Login failed. Please check your credentials.");
+      });
+    
+
+  
       }
 
   const Login_Register=()=>{

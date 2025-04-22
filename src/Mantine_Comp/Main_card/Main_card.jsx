@@ -119,8 +119,7 @@ export const Main_Card=()=>{
     useEffect(()=>{
         FetchUSers()
 
-        // =
-        // JSON.parse(localStorage.getItem('Registration'))
+       
 
         
 

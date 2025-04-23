@@ -51,12 +51,12 @@ export function AuthenticationTitle() {
     for(let i=0;i<Data.length;i++){
       if(email==Data[i].email && pass==Data[i].pass){
       setTimeout(()=>{set_Loading(false)},3000)
-      setTimeout(() => {
-      set_Notify(true);
-      setTimeout(() => {
-      set_Notify(false); // Turns off after 2 seconds
-      }, 2000);
-    }, 3000);
+    //   setTimeout(() => {
+    //   set_Notify(true);
+    //   setTimeout(() => {
+    //   set_Notify(false); // Turns off after 2 seconds
+    //   }, 2000);
+    // }, 3000);
     localStorage.setItem("user",JSON.stringify(Login_Data))
     
     setTimeout(()=>{navigate('/')},3500)
@@ -78,11 +78,7 @@ export function AuthenticationTitle() {
 
     //  setTimeout(()=>{
     //   alert("Registration done Successfully ")
-    //   set_Loading(false)
-
-    //   setTimeout(()=>{
-    //     Set_reg(false)
-    //   },1000)
+    
 
     // },1500)
 
@@ -98,6 +94,11 @@ export function AuthenticationTitle() {
       .then((data) => {
         console.log("Saved item:", data);
         alert("✅ Login successful!");
+        set_Loading(false)
+
+        setTimeout(()=>{
+          Set_reg(false)
+        },1000)
         // You can redirect or save user info to localStorage here
       })
       .catch((err) => {
